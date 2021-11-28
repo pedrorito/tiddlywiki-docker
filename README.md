@@ -3,7 +3,7 @@
 Run TiddlyWiki 5 via Docker.
 
 Forked from
-[djmaze/tiddlywiki-docker](https://github.com/djmaze/tiddlywiki-docker).
+[m0wer/tiddlywiki-docker](https://github.com/m0wer/tiddlywiki-docker) to add a ``docker-compose`` file.
 
 The Docker image is available at [m0wer/tiddlywiki - Docker
 Hub](https://hub.docker.com/r/m0wer/tiddlywiki).
@@ -20,39 +20,37 @@ m0wer/tiddlywiki | test       | ?
 
 * Docker.
 
+## Keeping the data
+
+Edit ``docker-compose.yml``, replacing ``/home/example/tiddlywiki`` with the path to your tiddlywiki directory.
+
+## Authentication
+
+To enable authentication, simply provide the
+`USERNAME` and `PASSWORD` environment in the ``variables.env`` file.
+
 ## Quickstart
 
 ```bash
-docker run -d -p 8080:8080 m0wer/tiddlywiki
+docker-compose up -d
 ```
 
 Now TiddlyWiki should be running on
 [http://localhost:8080](http://localhost:8080).
 
-## Keeping the data
-
-The container uses a Docker volume to save the wiki data. In order not
-to lose sight of that, I recommend using a local directory for the volume.
+## Stop server
 
 ```bash
-docker run -d -p 8080:8080 -v $(pwd)/.tiddlywiki:/var/lib/tiddlywiki m0wer/tiddlywiki
+docker-compose down
 ```
-
-In this example, the folder `$(pwd)/.tiddlywiki` is used for the data.
-
-## Authentication
-
-Authentication is disabled by default. To enable it, simply provide the
-`USERNAME` and `PASSWORD` environment variables.
 
 ## Other settings
 
 ### Limit Node.js memory
 
 If you are in a memory-constrained environment, you can provide the
-`NODE_MEM` environment variable to specify the memory ceiling (in MB)
+`NODE_MEM` environment variable to specify the memory ceiling (in MB and in ``variables.env``).
 
 ### Debug
 
-Set the `DEBUG_LEVEL` environment variable to `debug`. For example by passing
-`-e DEBUG_LEVEL=debug` option in `docker run`.
+Set the `DEBUG_LEVEL` environment variable to `debug` (also in ``variables.env``).
