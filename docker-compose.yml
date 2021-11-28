@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  tiddlywiki:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - /home/example/tiddlywiki:/var/lib/tiddlywiki
+    env_file:
+      - variables.env
+    restart: always
+    image: tiddlywiki
+    container_name: tiddlywiki
